@@ -58,4 +58,12 @@ public class ArrayBasics {
         }
         System.out.println("Found " + ele + ": " + found);
     }
+
+    public <T> void printArray(T[] array){
+        if(array != null && array.length > 0 ){
+            for(T element: array){
+                System.out.println(element);
+            }
+        }
+    }
 }
