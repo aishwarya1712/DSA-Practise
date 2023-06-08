@@ -19,6 +19,11 @@ public class Main {
         Integer[] arrayToRotate = new Integer[]{1, 2, 3, 4, 5};
         arrayOperations.rotateArrayToLeftUsingReverse(arrayToRotate, 2);
         arrays.printArray(arrayToRotate);
+
+
+        System.out.println("Position: " + arrayOperations.binarySearch(new Integer[]{10, 20, 30, 40, 60, 100}, 100, 0, 5));
+        System.out.println("Position: " + arrayOperations.binarySearch(new Integer[]{10, 20, 30, 40, 60, 100}, 10, 0, 5));
+        System.out.println("Position: " + arrayOperations.binarySearch(new Integer[]{10, 20, 30, 40, 60, 100}, 70, 0, 5));
     }
     public static void main(String[] args) {
        arrayMethods();
