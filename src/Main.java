@@ -5,7 +5,7 @@ import datastructures.arrays.ArraySort;
 public class Main {
     public static void arrayMethods(){
         ArrayBasics arrays = new ArrayBasics();
-//        arrays.initializeArray();
+//        arrays.initializeRandomArray(10, 100);
 //        arrays.insertAndAccessElement();
 //        arrays.searchElementInArray(new String[]{"Banana", "Orange", "Kiwi"}, "Orange");
 //        arrays.searchElementInArray(new String[]{"Banana", "Orange", "Kiwi"}, "Mango");
@@ -27,9 +27,9 @@ public class Main {
 //        System.out.println("Position: " + arrayOperations.binarySearch(new Integer[]{10, 20, 30, 40, 60, 100}, 70, 0, 5));
 
         ArraySort arraySort = new ArraySort();
-        Integer[] arrayToSort = new Integer[]{5, 5, 4, 7, 2, 3};
+        Integer[] arrayToSort = new Integer[]{12, 11, 13, 5, 6};
         arrays.printArray(arrayToSort);
-        arraySort.selectionSort(arrayToSort);
+        arraySort.insertionSort2(arrayToSort);
         arrays.printArray(arrayToSort);
     }
     public static void main(String[] args) {

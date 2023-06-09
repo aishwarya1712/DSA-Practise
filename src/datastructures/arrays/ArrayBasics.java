@@ -20,6 +20,9 @@ package datastructures.arrays;
     3. Real-time applications: image processing, data mining, robotics
  */
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class ArrayBasics {
     public void initializeArray(){
         /* declare and allocate memory to array */
@@ -60,10 +63,21 @@ public class ArrayBasics {
     }
 
     public <T> void printArray(T[] array){
-        if(array != null && array.length > 0 ){
-            for(T element: array){
-                System.out.println(element);
-            }
+//        if(array != null && array.length > 0 ){
+//            for(T element: array){
+//                System.out.println(element);
+//            }
+//        }
+        System.out.println(Arrays.toString(array));
+    }
+
+    public Integer[] initializeRandomArray(int arrayLength, int maxValue) {
+        Integer[] numbers = new Integer[arrayLength];
+        Random random = new Random();
+        for(int i = 0; i < numbers.length; i++){
+            numbers[i] = random.nextInt(maxValue);
         }
+        printArray(numbers);
+        return numbers;
     }
 }
