@@ -9,7 +9,6 @@ public class ArraySort {
      * 1) Easy to understand & implement
      * 2) No additional memory space
      * 3) Is "stable", preserves relative order of equal elements
-     *
      * Disadvantages:
      * 1) Worst case time complexity is O(n^2), so not suitable for larger datasets
      * **/
@@ -58,10 +57,9 @@ public class ArraySort {
      * Advantages:
      * 1) Easy to understand and implement
      * 2) No additional memory space
-     *
      * Disadvantages:
      * 1) Very high time complexity of O(n^2), so not good for large datasets
-     * 2) Is not "stable", does not preserve relative order of equal elements. But, we can make it stable by rotating element instead of swaping.
+     * 2) Is not "stable", does not preserve relative order of equal elements. But, we can make it stable by rotating element instead of swapping.
      */
     public void selectionSort(Integer[] array){
         int pass = 0;
@@ -240,4 +238,36 @@ public class ArraySort {
         // -------------------- END CONQUER  --------------------
     }
 
+    public void quickSort(Integer[] array, int lowIndex, int highIndex){
+        /* as the recursive call keeps going, we end up with an array of just one element. in that case, we just want to return to stop the recursive call */
+        if(lowIndex >= highIndex){
+            return;
+        }
+        int pivot = array[highIndex];
+        int leftPointer = lowIndex;
+        int rightPointer = highIndex - 1;
+        while(leftPointer < rightPointer) {
+
+            // Keep incrementing leftPointer until we find a number greater than the pivot, or hit the right pointer.
+            while (array[leftPointer] <= pivot && leftPointer < rightPointer) {
+                leftPointer++;
+            }
+
+            // Walk decrementing rightPointer until we find a number less than the pivot, or hit the left pointer.
+            while (array[rightPointer] >= pivot && leftPointer < rightPointer) {
+                rightPointer--;
+            }
+
+            swap(array, leftPointer, rightPointer);
+        }
+        swap(array, leftPointer, highIndex);
+        quickSort(array, lowIndex, leftPointer - 1);
+        quickSort(array, leftPointer + 1, highIndex);
+    }
+
+    private static void swap(Integer[] array, int index1, int index2){
+        int temp = array[index1];
+        array[index1] = array[index2];
+        array[index2] = temp;
+    }
 }

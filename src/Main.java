@@ -29,7 +29,7 @@ public class Main {
         ArraySort arraySort = new ArraySort();
         Integer[] arrayToSort = new Integer[]{12, 11, 13, 5, 6};
         arrays.printArray(arrayToSort);
-        arraySort.mergeSort(arrayToSort);
+        arraySort.quickSort(arrayToSort, 0, 4);
         arrays.printArray(arrayToSort);
     }
     public static void main(String[] args) {
