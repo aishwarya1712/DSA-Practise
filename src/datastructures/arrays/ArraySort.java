@@ -160,4 +160,84 @@ public class ArraySort {
         }
     }
 
+    /** Merge Sort
+     * Definition: A sorting algorithm that works by dividing the array into smaller sub-arrays until they can no longer be divided,
+     * then merging the sub-arrays in sorted order recursively until the entire array is fully sorted.
+     * This algorithm is based on the Divide & Conquer paradigm.
+     * Advantages:
+     * 1) Worst case time complexity is O(NlogN), performs well on large datasets. Can sort billions of numbers in seconds.
+     * 2) It is stable. Relative order of equal elements is preserved.
+     * Disadvantages:
+     * 1) Required additional space complexity O(N)
+     * 2) Not an in-place sorting algorithm
+     * 3) Might be overkill for smaller datasets.
+     * */
+    public void mergeSort(Integer[] inputArray){
+        int inputLength = inputArray.length;
+
+        /* if the input array length is less than 2, i.e 1 or 0, the array is already in sorted order, so simply return so the next line of code can be executed */
+        if(inputLength < 2)
+            return;
+        // -------------------- DIVIDE  --------------------
+
+        /* find the midIndex and create two arrays leftHalf and rightHalf */
+        int midIndex = inputLength / 2;
+        Integer[] leftHalf = new Integer[midIndex];
+        Integer[] rightHalf = new Integer[inputLength - midIndex]; // not [midIndex] to account for odd number of elements in inputArray
+
+        /* populate left half array from 0 until midIndex */
+        for(int i = 0; i < midIndex; i++){
+            leftHalf[i] = inputArray[i];
+        }
+
+        /* populate right half array from midIndex until inputLength */
+        for(int i = midIndex; i < inputLength; i++){
+            rightHalf[i - midIndex] = inputArray[i];
+        }
+        System.out.println("Left half: " + Arrays.toString(leftHalf));
+        System.out.println("Right half: " + Arrays.toString(rightHalf));
+
+        /* recursively split leftHalf and rightHalf sub arrays */
+        mergeSort(leftHalf);
+        mergeSort(rightHalf);
+        // -------------------- END DIVIDE  --------------------
+
+        /* merge leftHalf and rightHalf into one */
+        merge(inputArray, leftHalf, rightHalf);
+    }
+
+    private void merge(Integer[] inputArray, Integer[] leftHalf, Integer[] rightHalf){
+        // -------------------- CONQUER  --------------------
+        System.out.println("Input array during merge: " + Arrays.toString(inputArray));
+        System.out.println("Merging: "+ Arrays.toString(leftHalf) +" and " + Arrays.toString(rightHalf));
+        /* i is for leftHalf, j is for rightHalf and k is for storing sorted values back into inputArray */
+        int i = 0, j = 0, k = 0;
+        while(i < leftHalf.length && j < rightHalf.length){
+            if(leftHalf[i] <= rightHalf[j]){
+                /* if lh[i] is smaller, store that into input array and increment i pointer */
+                inputArray[k] = leftHalf[i];
+                i++;
+            } else {
+                inputArray[k] = rightHalf[j];
+                /* if rh[i] is smaller, store that into input array and increment j pointer */
+                j++;
+            }
+            k++;
+        }
+
+        /* if i or j reached the end of lh or rh, copy over the remaining elements into inputArray */
+        /* only one of the two while loops is actually executed */
+        while(i < leftHalf.length){
+            inputArray[k] = leftHalf[i];
+            i++;
+            k++;
+        }
+        while(j < rightHalf.length){
+            inputArray[k] = rightHalf[j];
+            j++;
+            k++;
+        }
+        // -------------------- END CONQUER  --------------------
+    }
+
 }
