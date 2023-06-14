@@ -1,5 +1,6 @@
 import datastructures.arrays.ArrayBasics;
 import datastructures.arrays.ArrayOperations;
+import datastructures.arrays.ArrayProblems;
 import datastructures.arrays.ArraySort;
 
 public class Main {
@@ -26,11 +27,18 @@ public class Main {
 //        System.out.println("Position: " + arrayOperations.binarySearch(new Integer[]{10, 20, 30, 40, 60, 100}, 10, 0, 5));
 //        System.out.println("Position: " + arrayOperations.binarySearch(new Integer[]{10, 20, 30, 40, 60, 100}, 70, 0, 5));
 
-        ArraySort arraySort = new ArraySort();
-        Integer[] arrayToSort = new Integer[]{12, 11, 13, 5, 6};
-        arrays.printArray(arrayToSort);
-        arraySort.quickSort(arrayToSort);
-        arrays.printArray(arrayToSort);
+//        ArraySort arraySort = new ArraySort();
+//        Integer[] arrayToSort = new Integer[]{12, 11, 13, 5, 6};
+//        arrays.printArray(arrayToSort);
+//        arraySort.quickSort(arrayToSort);
+//        arrays.printArray(arrayToSort);
+
+        ArrayProblems arrayProblems = new ArrayProblems();
+//        arrayProblems.largestThreeDistinctElements(new Integer[]{12, 11, 11, 5, 6});
+//        arrayProblems.secondLargestElement(new Integer[]{11, 11, 11, 11, 11});
+//        arrayProblems.pushZerosToEnd(new Integer[]{1, 2, 0, 3, 6});
+//        arrayProblems.evenPositionedGreaterThanOdd(new Integer[]{1, 2, 3, 4, 5, 6});
+        arrayProblems.oddPositionGreaterThanEven(new Integer[]{1, 2, 3, 4, 5, 6});
     }
     public static void main(String[] args) {
        arrayMethods();

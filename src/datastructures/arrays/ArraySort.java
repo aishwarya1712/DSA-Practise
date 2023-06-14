@@ -263,7 +263,7 @@ public class ArraySort {
         // int pivot = array[highIndex]; //in this case, we chose last element of the partition
         int pivotIndex = new Random().nextInt(highIndex - lowIndex) + lowIndex; //in this case, we choose a random index between lowIndex and highIndex
         int pivot = array[pivotIndex];
-        swap(array, pivotIndex, highIndex);
+        swap(array, pivotIndex, highIndex); // not needed if choosing pivot as last element
 
         /* Step 2: place pivot at the correct position */
         int leftPointer = partition(array, lowIndex, highIndex, pivot);
