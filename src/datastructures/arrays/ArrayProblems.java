@@ -119,9 +119,60 @@ public class ArrayProblems {
         System.out.println(Arrays.toString(array));
     }
 
+    public void segregateEvenOddNumbers(Integer[] array){
+        /* TC: O(N), SC: O(N) */
+        int n = array.length;
+        Integer[] outputArray = new Integer[n];
+        int leftPointer = 0;
+        int rightPointer = n-1;
+        for(int i = 0; i < n; i++){
+            if(array[i] % 2 == 0){
+                outputArray[leftPointer] = array[i];
+                leftPointer++;
+            } else {
+                outputArray[rightPointer] = array[i];
+                rightPointer--;
+            }
+        }
+        System.out.println("Segregated array: " + Arrays.toString(outputArray));
+    }
+
+    public void segregateEvenOdd2(Integer[] array){
+        /* TC: O(N^2), SC:O(N) */
+        int n = array.length;
+        int leftPointer = 0;
+        int rightPointer = n-1;
+        while(leftPointer < rightPointer){
+            while(array[leftPointer] % 2 == 0 && leftPointer < rightPointer){
+                leftPointer++;
+            }
+            while(array[rightPointer] % 2 != 0 && leftPointer < rightPointer){
+                rightPointer--;
+            }
+            swap(array, leftPointer, rightPointer);
+        }
+        System.out.println("Segregated array: " + Arrays.toString(array));
+    }
+
+    public void segregateEvenOddLomutoPartitionScheme(Integer[] array){
+        /* TC: O(N), SC: O(1) */
+        /* The principles of Lomuto Partition Scheme can also be applied to Quick Sort */
+        /* Basically, whenever an even element is encountered, swap it with leftPointer and increment leftPointer. */
+       int leftPointer = 0;
+       for(int j=0; j <array.length; j++){
+           if(array[j] % 2 == 0){
+
+               swap(array, leftPointer, j);
+               leftPointer++;
+           }
+       }
+        System.out.println("Segregated array: " + Arrays.toString(array));
+    }
     private void swap(Integer[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
+
+
 }

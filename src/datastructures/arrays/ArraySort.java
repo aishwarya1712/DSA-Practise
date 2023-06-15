@@ -274,6 +274,7 @@ public class ArraySort {
     }
 
     private int partition(Integer[] array, int lowIndex, int highIndex, int pivot) {
+        /* Hoare's Partition Scheme */
         int leftPointer = lowIndex;
         int rightPointer = highIndex - 1;
         while(leftPointer < rightPointer) {

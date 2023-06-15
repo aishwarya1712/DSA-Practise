@@ -38,7 +38,9 @@ public class Main {
 //        arrayProblems.secondLargestElement(new Integer[]{11, 11, 11, 11, 11});
 //        arrayProblems.pushZerosToEnd(new Integer[]{1, 2, 0, 3, 6});
 //        arrayProblems.evenPositionedGreaterThanOdd(new Integer[]{1, 2, 3, 4, 5, 6});
-        arrayProblems.oddPositionGreaterThanEven(new Integer[]{1, 2, 3, 4, 5, 6});
+//        arrayProblems.oddPositionGreaterThanEven(new Integer[]{1, 2, 3, 4, 5, 6});
+//        arrayProblems.segregateEvenOdd2(new Integer[]{1,9,5,3,2,6,7,11});
+        arrayProblems.segregateEvenOddLomutoPartitionScheme(new Integer[]{2,4,6,8});
     }
     public static void main(String[] args) {
        arrayMethods();
