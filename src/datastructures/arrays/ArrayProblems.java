@@ -1,6 +1,7 @@
 package datastructures.arrays;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class ArrayProblems {
 
@@ -167,6 +168,98 @@ public class ArrayProblems {
            }
        }
         System.out.println("Segregated array: " + Arrays.toString(array));
+    }
+
+    public void cyclicSort(Integer[] array){
+        /* this is to sort an array of length n containing numbers in the range [1,n] */
+        int i = 0;
+        while(i < array.length){
+            int correctIndex = array[i] - 1;
+            if(correctIndex != i){
+                swap(array, i, correctIndex);
+            } else {
+                i++;
+            }
+        }
+        System.out.println("Cyclic sorted array: " + Arrays.toString(array));
+    }
+
+    public int numberOfTriangles(Integer[] array){
+        /* - sort arrayed array: {a, b, c}, where a<b<c
+        - c > b ⇒ c + a > b + a
+        - b + a has to be greater than b
+        - Therefore, c + a > b + a > b
+        - By default: c + a > b
+
+        - c > a ⇒ c + b > a + b
+        - a + b > a
+        - Therefore, c + b > a + b > a
+        - By default: c + b > a
+        - We only need to check a + b > c
+
+        start with count=0, a = 0, c = n-1 and b = c-1
+        check if a + b > c. If it is not, increment a.
+        if it is, then add b-a to the count and decrement b.
+        Repeat the process as long as a < b and c > 1
+        */
+        if(array.length <3){
+            return 0;
+        }
+        Arrays.sort(array);
+        int count = 0;
+        /* initialize c to the largest element in array */
+        int c = array.length - 1;
+        while(c > 1){
+            int a = 0;
+            int b = c-1;
+            while(a < b){
+                if(array[a] + array[b] > array[c]){
+                    /* we found the 'a' for which array[a] + array[b] > array[c], therefore, every element after index a until index b will be a valid triangle. */
+                    count = count + (b-a);
+                    /* then decrement b and continue checking */
+                    b--;
+                } else {
+                    a++;
+                }
+            }
+            c--;
+        }
+        System.out.println("number of triangles: " + count);
+        return count;
+    }
+
+    public void printDistinct(Integer[] array) {
+        Integer[] arrayCopy = Arrays.copyOf(array, array.length);
+        /* Method 1 */
+        for (int i = 0; i < arrayCopy.length - 1; i++) {
+            if (array[i] != null) {
+                System.out.println(arrayCopy[i]);
+                for (int j = i + 1; j < arrayCopy.length; j++) {
+                    if (arrayCopy[j] == arrayCopy[i]) {
+                        arrayCopy[j] = null;
+                    }
+                }
+            }
+        }
+
+        /* Method 2: Alternatively, use hashmap to solve in O(N) TC and O(N) SC */
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i <array.length; i++){
+            map.put(array[i], i);
+        }
+        System.out.println(map.keySet());
+
+        /* Method 3: Sort array. Compare adjacent elements. Print only if not equal. */
+        Arrays.sort(array);
+        System.out.println("method 3");
+        int i;
+        for(i = 0; i < array.length - 1; i++){
+            if(array[i] != array[i+1]){
+                System.out.println(array[i]);
+            }
+        }
+        System.out.println(array[i]);
+
     }
     private void swap(Integer[] array, int i, int j) {
         int temp = array[i];

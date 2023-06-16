@@ -40,7 +40,10 @@ public class Main {
 //        arrayProblems.evenPositionedGreaterThanOdd(new Integer[]{1, 2, 3, 4, 5, 6});
 //        arrayProblems.oddPositionGreaterThanEven(new Integer[]{1, 2, 3, 4, 5, 6});
 //        arrayProblems.segregateEvenOdd2(new Integer[]{1,9,5,3,2,6,7,11});
-        arrayProblems.segregateEvenOddLomutoPartitionScheme(new Integer[]{2,4,6,8});
+//        arrayProblems.segregateEvenOddLomutoPartitionScheme(new Integer[]{2,4,6,8});
+//        arrayProblems.cyclicSort(new Integer[]{10, 7, 9, 2, 8, 3, 5, 4, 6, 1});
+//        arrayProblems.numberOfTriangles(new Integer[]{1, 3, 4, 6, 12, 13, 16, 20});
+        arrayProblems.printDistinct(new Integer[]{12,10,9,45,2,10,10,45});
     }
     public static void main(String[] args) {
        arrayMethods();
