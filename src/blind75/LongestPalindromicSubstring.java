@@ -12,7 +12,40 @@ public class LongestPalindromicSubstring {
         Level of difficulty: medium
 
      */
+
+    public String longestPalindrome_Efficient(String s){
+        /* TC: O(N^2) */
+        String longestPalindrome = "";
+        for(int i = 0; i < s.length(); i++){
+            /* check odd length palindromes */
+            int left = i;
+            int right = i;
+            while(left >=0 && right < s.length() && s.charAt(left) == s.charAt(right)){
+                String newPalindrome = s.substring(left, right + 1);
+                if(newPalindrome.length() > longestPalindrome.length()){
+                    longestPalindrome = newPalindrome;
+                }
+                left--;
+                right++;
+            }
+
+            /* check even length palindromes */
+            left = i;
+            right = i + 1;
+            while(left >=0 && right < s.length() && s.charAt(left) == s.charAt(right)){
+                String newPalindrome = s.substring(left, right + 1);
+                if(newPalindrome.length() > longestPalindrome.length()){
+                    longestPalindrome = newPalindrome;
+                }
+                left--;
+                right++;
+            }
+
+        }
+        return longestPalindrome;
+    }
     public String longestPalindrome_BruteForce(String s) {
+        /* TC: O(N^3) */
         if(s.length() == 1){
             return s;
         }
