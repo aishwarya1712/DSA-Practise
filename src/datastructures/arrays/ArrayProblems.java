@@ -261,6 +261,61 @@ public class ArrayProblems {
         System.out.println(array[i]);
 
     }
+
+    public void findSingle(Integer[] array){
+        if(array.length < 3){
+            return;
+        }
+        /* Method 1 */
+        Arrays.sort(array);
+        int i = 0;
+        while(i < array.length - 1){
+            if(array[i] == array[i+1]){
+                i = i + 2;
+            } else {
+                System.out.println("Single number is: " + array[i]);
+                break;
+            }
+        }
+
+        /* Method 2: Using XOR. Doesn't need sorting. */
+        int result = array[0];
+        for(int j = 1; j <array.length; j++){
+            result = result ^ array[j];
+        }
+        System.out.println("Single number is: " + result);
+    }
+
+    public void printLeaders(Integer[] array){
+        if(array.length == 0)
+            return;
+        int leader = array[array.length - 1];
+        System.out.println("Leader: " + leader);
+        if(array.length == 1)
+            return;
+        for(int i = array.length - 2; i >= 0; i--){
+            if(array[i] > leader){
+                leader = array[i];
+                System.out.println("Leader: " + leader);
+            }
+        }
+    }
+
+    public void findSubArrayWithGivenSum(Integer[] array, int givenSum){
+        int calculatedSum = 0;
+        for(int i = 0; i < array.length - 1; i++){
+            int j = i + 1;
+            calculatedSum = array[i];
+            while(j < array.length && calculatedSum < givenSum){
+                calculatedSum += array[j];
+                if(calculatedSum == givenSum){
+                    System.out.println("Found subarray, i: " + i + " and j: " + j);
+                }
+                j++;
+            }
+        }
+
+    }
     private void swap(Integer[] array, int i, int j) {
         int temp = array[i];
         array[i] = array[j];

@@ -1,3 +1,4 @@
+import blind75.LongestPalindromicSubstring;
 import datastructures.arrays.ArrayBasics;
 import datastructures.arrays.ArrayOperations;
 import datastructures.arrays.ArrayProblems;
@@ -43,9 +44,15 @@ public class Main {
 //        arrayProblems.segregateEvenOddLomutoPartitionScheme(new Integer[]{2,4,6,8});
 //        arrayProblems.cyclicSort(new Integer[]{10, 7, 9, 2, 8, 3, 5, 4, 6, 1});
 //        arrayProblems.numberOfTriangles(new Integer[]{1, 3, 4, 6, 12, 13, 16, 20});
-        arrayProblems.printDistinct(new Integer[]{12,10,9,45,2,10,10,45});
+//        arrayProblems.printDistinct(new Integer[]{12,10,9,45,2,10,10,45});
+//        arrayProblems.findSingle(new Integer[]{3, 5, 4, 5, 3, 4,2, 2, 10});
+//        arrayProblems.printLeaders(new Integer[]{16, 17, 4, 3, 5, 2});
+        arrayProblems.findSubArrayWithGivenSum(new Integer[]{1, 4, 0, 0, 3, 10, 5}, 7);
     }
     public static void main(String[] args) {
-       arrayMethods();
+//       arrayMethods();
+
+        LongestPalindromicSubstring longestPalindromicSubstring = new LongestPalindromicSubstring();
+        System.out.println(longestPalindromicSubstring.longestPalindrome_BruteForce("babad"));
     }
 }
