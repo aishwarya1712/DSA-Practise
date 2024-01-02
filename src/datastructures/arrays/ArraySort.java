@@ -19,6 +19,7 @@ public class ArraySort {
         ** if we get through an iteration without any swap, the array is sorted
         * */
         while(swappedSomething) {
+
             swappedSomething = false;
             for (int i = 0; i < array.length - 1; i++) {
                 if (array[i] > array[i + 1]) {
