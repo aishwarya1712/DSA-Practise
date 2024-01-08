@@ -125,6 +125,32 @@ public class Tries {
         return numPrefixes;
 
     }
+
+    public static String ans = "";
+    public static void longestWordWithAllPrefixes(Node root, StringBuilder temp){
+        if(root == null){
+            return;
+        }
+
+        for(int i = 0; i < 26; i++ ){
+            if(root.children[i] != null && root.children[i].eow == true){
+                // update temp
+                temp.append((char)(i + 'a'));
+
+                // compare temp and ans
+                if(temp.length() > ans.length()){
+                    ans = temp.toString();
+                }
+
+                // call recursively on current child
+                longestWordWithAllPrefixes(root.children[i], temp);
+
+                // we'll backtrack and come here so we have to remove the character we just added
+                temp.deleteCharAt(temp.length() - 1);
+
+            }
+        }
+    }
     public static void main(String[] args){
         String[] words = {"apple", "app", "mango", "man", "woman"};
         for(int i = 0; i < words.length; i++){
@@ -142,6 +168,14 @@ public class Tries {
         System.out.println("ababa: " + countUniqueSubstrings("ababa"));
         System.out.println("apple: " + countUniqueSubstrings("apple"));
 
+
+        root = new Node();
+        String[] words2 = {"a", "banana", "ap", "app", "appl", "apple", "apply"};
+        for(int i = 0; i < words2.length; i++){
+            insertIntoTrie(words2[i]);
+        }
+        longestWordWithAllPrefixes(root, new StringBuilder(""));
+        System.out.println(ans);
 
 
 
