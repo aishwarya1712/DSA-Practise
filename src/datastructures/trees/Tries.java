@@ -1,5 +1,8 @@
 package datastructures.trees;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tries {
 
     static class Node{
@@ -80,6 +83,48 @@ public class Tries {
         return true;
     }
 
+    public static List<String> getSuffixes(String key){
+        List<String> result = new ArrayList<>();
+        for(int i = 0; i < key.length(); i++){
+            result.add(key.substring(i, key.length()));
+        }
+        return result;
+    }
+
+    public static int countNodes(Node root){
+        if(root == null){
+            return 0;
+        }
+        int count = 0;
+        for(int i = 0; i < 26; i++){
+            if(root.children[i] != null){
+                count += countNodes(root.children[i]);
+            }
+        }
+        return 1 + count;
+    }
+    public static int countUniqueSubstrings(String key){
+        // example: for input ababa, output is 10 -> a, ab, aba, abab, ababa, b, ba, bab, baba, ''
+
+        // clear tree
+        root = null;
+        root = new Node();
+        // step 1: generate suffixes
+        List<String> suffixes = getSuffixes(key);
+        System.out.println(suffixes.size());
+
+        // step 2: insert into trie
+        // create new trie
+        for(int i = 0; i < suffixes.size(); i++){
+            insertIntoTrie(suffixes.get(i));
+        }
+
+        // step 3: count # of prefix
+        int numPrefixes = countNodes(root);
+
+        return numPrefixes;
+
+    }
     public static void main(String[] args){
         String[] words = {"apple", "app", "mango", "man", "woman"};
         for(int i = 0; i < words.length; i++){
@@ -89,8 +134,16 @@ public class Tries {
         System.out.println(wordBreak("applemangoe"));
         System.out.println(startsWith("app"));
         System.out.println(startsWith("moon"));
-        System.out.println(startsWith("wo "));
-//        System.out.println(searchInTrie("a"));
+        System.out.println(startsWith("wo"));
+        System.out.println( countUniqueSubstrings("ababa"));
+        System.out.println(searchInTrie("a"));
+
+
+        System.out.println("ababa: " + countUniqueSubstrings("ababa"));
+        System.out.println("apple: " + countUniqueSubstrings("apple"));
+
+
+
 
     }
 }
