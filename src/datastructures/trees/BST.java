@@ -1,5 +1,7 @@
 package datastructures.trees;
 
+import java.util.ArrayList;
+
 public class BST {
 
     static class Node {
@@ -107,6 +109,28 @@ public class BST {
         }
     }
 
+    public static void printPath(ArrayList<Integer> path){
+        for(Integer val: path){
+            System.out.print(val +" -> ");
+        }
+        System.out.println();
+    }
+    public static void printAllPathsFromRootToLeaf(Node root, ArrayList<Integer> path){
+        if(root == null){
+            return;
+        }
+
+        path.add(root.data);
+
+        if(root.left == null && root.right == null){
+            printPath(path);
+        }
+
+        printAllPathsFromRootToLeaf(root.left, path);
+        printAllPathsFromRootToLeaf(root.right, path);
+        path.remove(path.size() - 1);
+    }
+
     public static void main(String[] args){
         int[] values = {8, 5, 1, 3, 4, 6, 10, 11, 14};
         Node root = null;
@@ -132,12 +156,14 @@ public class BST {
         System.out.println();
 
         // adding back values so we can call printInRange function
-        values = new int[]{8, 5, 1, 3, 4, 6, 10, 11, 14};
+        values = new int[]{8, 5, 3, 1, 4, 6, 10, 11, 14};
         root = null;
         for(int i = 0; i < values.length; i++){
             root = insert(root, values[i]);
         }
         printInRange(root, 3, 10);
+
+        printAllPathsFromRootToLeaf(root, new ArrayList<>());
 
     }
 }
