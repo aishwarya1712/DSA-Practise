@@ -67,13 +67,29 @@ public class Tries {
         }
         return false;
     }
+
+    public static boolean startsWith(String prefix){
+        Node current = root;
+        for(int i =0; i < prefix.length(); i++){
+            int index = prefix.charAt(i) - 'a';
+            if(current.children[index] == null){
+                return false;
+            }
+            current = current.children[index];
+        }
+        return true;
+    }
+
     public static void main(String[] args){
-        String[] words = {"the", "a", "there", "their", "any"};
+        String[] words = {"apple", "app", "mango", "man", "woman"};
         for(int i = 0; i < words.length; i++){
             insertIntoTrie(words[i]);
         }
-        System.out.println(wordBreak("thereanya"));
-
+        System.out.println(wordBreak("applemango"));
+        System.out.println(wordBreak("applemangoe"));
+        System.out.println(startsWith("app"));
+        System.out.println(startsWith("moon"));
+        System.out.println(startsWith("wo "));
 //        System.out.println(searchInTrie("a"));
 
     }
