@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 
 public class Graph {
@@ -123,6 +124,29 @@ public class Graph {
     }
 
 
+    public static void createDAG(ArrayList<Edge>[] dag){
+        /* directed graph with no cycles */
+        for(int i = 0; i < dag.length; i++){
+            dag[i] = new ArrayList<>();
+        }
+        dag[2].add(new Edge(2, 3));
+        dag[3].add(new Edge(3, 1));
+        dag[4].add(new Edge(4 ,0));
+        dag[4].add(new Edge(4, 1));
+        dag[5].add(new Edge(5 ,0));
+        dag[5].add(new Edge(5 ,2));
+    }
+
+    public static void topologicalSortDfs(ArrayList<Edge>[] dag, int curr, boolean[] visited, Stack<Integer> stack){
+        visited[curr] = true;
+        for(int i = 0 ; i < dag[curr].size();i++){
+            Edge e = dag[curr].get(i);
+            if(!visited[e.destination]){
+                topologicalSortDfs(dag, e.destination, visited, stack);
+            }
+        }
+        stack.push(curr);
+    }
     public static void main(String[] args){
         int V = 7;
         ArrayList<Edge>[] graph = new ArrayList[V];
@@ -142,8 +166,23 @@ public class Graph {
         }
         printAllPathsFromSourceToTarget(graph, new boolean[graph.length], 0, 5, "0");
 
-        ArrayList<Edge>[] directedGraph = new ArrayList[V];
+        ArrayList<Edge>[] directedGraph = new ArrayList[4 ];
         createDirectedGraph(directedGraph);
         hasCycle(directedGraph);
+
+        ArrayList<Edge>[] dag = new ArrayList[6];
+        Stack<Integer> dagStack = new Stack<>();
+        createDAG(dag);
+        boolean visitedDag[] = new boolean[dag.length];
+        for(int i = 0; i < visitedDag.length; i++){
+            if(!visitedDag[i]){
+                topologicalSortDfs(dag, i, visitedDag, dagStack);
+            }
+        }
+        while(!dagStack.isEmpty()){
+            Integer curr = dagStack.pop();
+            System.out.print(curr + " ");
+        }
+        System.out.println();
     }
 }
