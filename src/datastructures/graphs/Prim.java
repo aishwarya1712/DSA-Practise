@@ -55,19 +55,18 @@ public class Prim {
     }
 
     public static void primsAlgorithm(ArrayList<Edge>[] graph, int V){
-        PriorityQueue<Pair> pq = new PriorityQueue<>();
+        PriorityQueue<Pair> pq = new PriorityQueue<>(); // non-MST set
         pq.add(new Pair(0,0));
-        boolean[] visited = new boolean[V];
+        boolean[] visited = new boolean[V]; // MST set
         int totalCost = 0;
         while(!pq.isEmpty()){
             Pair curr = pq.remove();
             if(!visited[curr.node]){
                 visited[curr.node] = true;
+                totalCost += curr.cost;
                 for(int i = 0; i < graph[curr.node].size(); i++){
                     Edge e = graph[curr.node].get(i);
                     if(!visited[e.dest]){
-                        totalCost = totalCost + e.wt;
-                        visited[e.dest] = true;
                         pq.add(new Pair(e.dest, e.wt));
                     }
                 }
