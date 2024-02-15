@@ -20,10 +20,12 @@ public class Prim {
     }
 
     private static class Pair implements Comparable<Pair> {
+        int parent;
         int node;
         int cost;
 
-        public Pair(int n, int c){
+        public Pair(int p, int n, int c){
+            this.parent = p;
             this.node = n;
             this.cost = c;
         }
@@ -56,23 +58,30 @@ public class Prim {
 
     public static void primsAlgorithm(ArrayList<Edge>[] graph, int V){
         PriorityQueue<Pair> pq = new PriorityQueue<>(); // non-MST set
-        pq.add(new Pair(0,0));
+        pq.add(new Pair(-1, 0,0));
         boolean[] visited = new boolean[V]; // MST set
         int totalCost = 0;
+        ArrayList<Edge> mstEdges = new ArrayList<>();
         while(!pq.isEmpty()){
             Pair curr = pq.remove();
             if(!visited[curr.node]){
                 visited[curr.node] = true;
                 totalCost += curr.cost;
+                mstEdges.add(new Edge(curr.parent, curr.node, curr.cost));
                 for(int i = 0; i < graph[curr.node].size(); i++){
                     Edge e = graph[curr.node].get(i);
                     if(!visited[e.dest]){
-                        pq.add(new Pair(e.dest, e.wt));
+                        pq.add(new Pair(curr.node,  e.dest, e.wt));
                     }
                 }
             }
         }
         System.out.println("Final total cost is: " + totalCost);
+        for(Edge e: mstEdges){
+            System.out.print(e.src +" -> " + e.dest + " wt: " + e.wt);
+            System.out.println();
+        }
+
     }
 
     public static void main(String[] args){
