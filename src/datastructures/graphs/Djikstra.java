@@ -3,7 +3,9 @@ package datastructures.graphs;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class WeightedGraph {
+/* Does not work for graphs with negative weights */
+/* TC: O(E + ElogV) */
+public class Djikstra {
     static class Edge {
         int src;
         int dest;
@@ -16,7 +18,7 @@ public class WeightedGraph {
         }
     }
 
-    public static void createGraph(ArrayList<Edge> graph[]) {
+    public static void createWeightedGraph(ArrayList<Edge> graph[]) {
         for(int i = 0; i < graph.length; i++) {
             graph[i] = new ArrayList<>();
         }
@@ -90,7 +92,7 @@ public class WeightedGraph {
     public static void main(String args[]) {
         int V = 6;
         ArrayList<Edge> graph[] = new ArrayList[V];
-        createGraph(graph);
+        createWeightedGraph(graph);
         dijkstra(graph, 0, V);
 
     }
