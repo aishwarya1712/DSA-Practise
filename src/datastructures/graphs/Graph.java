@@ -1,6 +1,5 @@
 package datastructures.graphs;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -64,7 +63,6 @@ public class Graph {
     }
 
     public static void printAllPathsFromSourceToTarget(ArrayList<Edge> graph[], boolean[] visited, int target, int curr, String path){
-
         if(curr == target){
             System.out.println(path);
             return;
