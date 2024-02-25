@@ -1,5 +1,10 @@
 package dynamicprogramming;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /* Problem
     You are climbing a staircase with n steps to reach the top.
     Each time, you can either climb one step or two steps.
@@ -139,12 +144,62 @@ public class ClimbingStairs {
         * 5. Location of answer: dp[n] */
 
         int[] dp = new int[n + 1];
+        String path = "";
         dp[0] = 0;
         dp[1] = prices[1];
-        for(int i = 2; i <=n; i++){
-            dp[i] = Math.min(dp[i - 1], dp[i - 2]) + prices[i];
+        for(int i = 2; i <= n; i++){
+            int min = 0;
+            if(dp[i - 1] <= dp[i - 2]){
+                min = dp[i - 1];
+                path += "-->" + (i - 1);
+            } else {
+                min = dp[i - 2];
+                path += "-->" + (i - 2);
+            }
+            dp[i] = min + prices[i];
         }
+        path += "-->" + n;
+        System.out.println("Path is: " + path);
         return dp[n];
+    }
+
+    public static List<Integer> cheapestPathToTop(int n, int[] prices){
+        /* You are climbing a paid staircase with n steps.
+        Each time, you can take 1 or 2 steps.
+        It takes prices[i] to reach the ith step.
+        Return the cheapest path to reach the top?
+         */
+        /* 1. Define Objective function: F(i) is the cheapest way to get to the ith stair
+         * 2. Identify Base Cases: F(0) is always 0, F(1) is prices[1]
+         * 3. Recurrence function: F(n) = min(F(n-1), F(n-2)) + prices[n]
+         * 4. Order of computation: Bottom-up
+         * 5. Location of answer: dp[n] */
+
+        int[] dp = new int[n + 1];
+        int[] from = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = prices[1];
+        for(int i = 2; i <= n; i++){
+            int min;
+            if(dp[i - 1] <= dp[i - 2]){
+                min = dp[i - 1];
+                from[i] = i - 1;
+            } else {
+                min = dp[i - 2];
+                from[i] = i - 2;
+            }
+            dp[i] = min + prices[i];
+        }
+
+        List<Integer> path = new ArrayList<>();
+        for(int i = n; i >= 0; i = from[i]){
+            path.add(i);
+            if(i == 0){
+                break;
+            }
+        }
+        System.out.println("path is: " + path);
+        return path.reversed();
     }
 
 
@@ -164,6 +219,7 @@ public class ClimbingStairs {
         int[] prices = new int[]{0, 3, 2, 4};
         System.out.println("Cheapest way to get to the top of 3 stairs with max 2 steps at a time: " + cheapestWayToTop(3, prices));
 
-
+        int[] pricesNew = new int[]{0, 3, 2, 4, 6, 1, 1, 5, 3};
+        System.out.println("Cheapest path to get to the top of 8 stairs with max 2 steps at a time: " + cheapestPathToTop(8, pricesNew));
     }
 }
