@@ -35,7 +35,7 @@ public class CoinChange {
         for(int i = 1; i <= n; i++){
             dp[i][0] = 0;
         }
-        // F(0, i)
+        // F(0, j)
         for(int j = 1; j <= t; j++){
             dp[0][j] = 0;
         }
@@ -67,12 +67,53 @@ public class CoinChange {
 
     /* End of Problem Part 2(a)  */
 
-    /* Start of Problem 2(b)
-
+    /* Problem Part 2(b): Given an unlimited supply of coins of given denominations,
+     * find the total number of ways to make a change of size n using NO MORE THAN t coins
      */
 
+    public static int numWays_noMoreThanTCoins(int n, int t, List<Integer> denominations){
+        /* 1. Define Objective Function
+        F(i, t) is the number ways to make a change of size i using no more than t coins
+         */
+
+        int[][] dp = new int[n+1][t+1];
+
+        // F(0,0) = 1
+        dp[0][0] = 1;
+
+        // F(0, j) = 1;
+        for(int j = 1; j <=t; j++){
+            dp[0][j] = 1;
+        }
+
+        // F(i, 0) = 0
+        for(int i = 1; i <= n; i++){
+            dp[i][0] = 0;
+        }
+
+        // F(i, 1) = 1 if i is in denominations;
+        for(int i = 1; i <= n; i++){
+            if(denominations.contains(i)){
+                dp[i][1] = 1;
+            } else {
+                dp[i][1] = 0;
+            }
+        }
+
+        for(int i = 2; i <= n; i++){
+            for(int j = 2; j <=t; j++){
+                for(int coin: denominations){
+                    if(i - coin >= 0){
+                        dp[i][j] += dp[i - coin][j - 1];
+                    }
+                }
+            }
+        }
+        return dp[n][t];
+    }
     public static void main(String[] args){
         System.out.println("Num ways to make change of size 10 with denominations 1,3,5,10 are: "+ numWaysToMakeChange_WithDenominations(10, new int[]{1,3, 5,10}));
         System.out.println(numWays_exactlyTCoins(7, 3, new ArrayList<>(Arrays.asList(1, 2, 3, 5))));
+        System.out.println(numWays_noMoreThanTCoins(7, 3, new ArrayList<>(Arrays.asList(1, 2, 3, 5))));
     }
 }
