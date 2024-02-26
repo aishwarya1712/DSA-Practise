@@ -111,9 +111,34 @@ public class CoinChange {
         }
         return dp[n][t];
     }
+    /* End of Problem Part 2(b) */
+
+
+    /* Part 3:
+        Given an unlimited supply of coins of given denominations,
+     * find the total number of ways to make a change of size n using an even number of coins
+     */
+    public static int numWays_EvenNumberOfCoins(int n, List<Integer> denominations){
+        int[][] dp = new int[n+1][2];
+        /* 0 represents odd and 1 represents even */
+        dp[0][0] = 0;
+        dp[0][1] = 1;
+        // dp[i][0]
+        for(int i = 1; i <= n; i++){
+            for(int coin : denominations) {
+                if (i - coin >= 0) {
+                        dp[i][0] += dp[i - coin][1];
+                        dp[i][1] += dp[i - coin][0];
+                }
+            }
+        }
+        return dp[n][1];
+    }
     public static void main(String[] args){
         System.out.println("Num ways to make change of size 10 with denominations 1,3,5,10 are: "+ numWaysToMakeChange_WithDenominations(10, new int[]{1,3, 5,10}));
         System.out.println(numWays_exactlyTCoins(7, 3, new ArrayList<>(Arrays.asList(1, 2, 3, 5))));
         System.out.println(numWays_noMoreThanTCoins(7, 3, new ArrayList<>(Arrays.asList(1, 2, 3, 5))));
+        System.out.println(numWays_EvenNumberOfCoins(4, new ArrayList<>(Arrays.asList(1, 3, 5, 10))));
+        System.out.println(numWays_EvenNumberOfCoins(6, new ArrayList<>(Arrays.asList(1, 3, 5, 10))));
     }
 }
