@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class Dijkstra {
+    /* Greedy algorithm */
     static class Edge {
         int src;
         int dest;
