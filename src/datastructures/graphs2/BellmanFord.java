@@ -45,14 +45,15 @@ public class BellmanFord {
             }
         }
         // go to each edge and apply relaxation
-        // repeat this V-1 times
+        // repeat this V-1 times.
+        // Why V-1 times? Because, between any two nodes, there can be at most V-1 nodes.
         for(int k = 0; k < numVertices - 1; k++){
             for(int i = 0; i < numVertices; i++){
                 for(int j = 0; j < graph[i].size(); j++){
                     Edge e = graph[i].get(j);
                     int u = distances[e.src];
                     int v = distances[e.dest];
-                    if(u + e.wt < v){
+                    if(distances[u] != Integer.MAX_VALUE && u + e.wt < v){
                         distances[e.dest] = u + e.wt;
                     }
                 }
